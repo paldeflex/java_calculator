@@ -3,10 +3,9 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 
 public class ButtonPanel extends JPanel {
-    private String[] symbols = {"C", "±", "%", "+", "7", "8", "9", "−", "4", "5", "6", "×", "1", "2", "3", "÷", "0", ".", "="};
-    private JButton[] btns = new JButton[symbols.length];
 
-    ButtonPanel(ActionListener listener) {
+    ButtonPanel(String[] symbols, ActionListener listener) {
+        JButton[] btns = new JButton[symbols.length];
         setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.fill = GridBagConstraints.BOTH; // Определяет, каким образом компонент будет растягиваться в ячейке.
