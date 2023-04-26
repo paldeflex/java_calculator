@@ -113,6 +113,7 @@ public class Calculator extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         String cmd = e.getActionCommand();
+        outputField.resizeFont();
 
         if (cmd.matches("[0-9.]")) {
             outputFieldValidator(cmd, outputField);
@@ -123,16 +124,18 @@ public class Calculator extends JFrame implements ActionListener {
                     outputField.setText("");
                 }
                 case "=" -> {
-                    try {
-                        String expression = expressionField.getText() + outputField.getText();
-                        double result = evaluateExpression(expression);
-                        outputField.setText(formatNumber(result));
-                        expressionField.setText(""); // Добавьте эту строку для очистки поля expressionField
-                    } catch (NumberFormatException ex) {
-                        outputField.setText("Ошибка");
-                    } catch (ArithmeticException ex) {
-                        outputField.setText("Деление на ноль невозможно!");
-                    }
+                        try {
+                            String expression = expressionField.getText() + outputField.getText();
+                            double result = evaluateExpression(expression);
+                            outputField.setText(formatNumber(result));
+                            expressionField.setText(""); // Добавьте эту строку для очистки поля expressionField
+                        } catch (NumberFormatException ex) {
+                            outputField.setText("Ошибка");
+                        } catch (ArithmeticException ex) {
+                            outputField.setText("Деление на ноль невозможно!");
+                        }
+                    outputField.resizeFont();
+
                 }
             }
         }
