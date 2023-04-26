@@ -11,7 +11,7 @@ import java.util.regex.Pattern;
 
 public class Calculator extends JFrame implements ActionListener {
     private final ImageIcon icon = new ImageIcon("src/icon.png");
-    private final String[] symbols = {"C", "±", "%", "+", "7", "8", "9", "-", "4", "5", "6", "*", "1", "2", "3", "/", "0", ".", "="};
+    private final String[] symbols = {"7", "8", "9", "+", "4", "5", "6", "-", "1", "2", "3", "*", "0", ".", "C", "/", "="};
 
     private final JPanel panel = new JPanel(new BorderLayout(5, 5));
     private final JPanel outputPanel = new JPanel();
@@ -80,30 +80,6 @@ public class Calculator extends JFrame implements ActionListener {
         }
     }
 
-    public void toggleNegativeSign(CustomTextField field) {
-        double neg = Double.parseDouble(field.getText());
-        neg *= -1;
-
-        // Проверяем, является ли число целым
-        if (neg % 1 == 0) {
-            // Если число целое, преобразовываем его в int и затем в строку
-            field.setText(String.valueOf((long) neg));
-        } else {
-            // Если число нецелое, форматируем его и преобразовываем в строку
-            field.setText(formatNumber(neg));
-        }
-    }
-
-    // ОСНОВНОЕ
-    // TODO: Если есть пересечение арифметических знаков с отрицательным числом, то отрицательное число должно браться в скобки, чтобы была возможность вычисления т.е например вместо "80 + - 6.23" должно быть 80 + (-6.23)"
-    // TODO: Добавить возможность считать проценты
-
-    // ДОПОЛНИТЕЛЬНО
-    // TODO: Менять размер шрифта, если количество символов выходит за пределы экрана
-    // TODO: Заменить знаки минуса, умножения и деления
-    // TODO: Добавить начальное значения в outputField - 0 и чтобы при этом всё работало как надо
-    // TODO: Сделать круглые кнопки
-
     public double evaluateExpression(String expression) {
         // Используем StringTokenizer для разделения чисел и операторов
         StringTokenizer tokenizer = new StringTokenizer(expression, "+-*/", true);
@@ -130,7 +106,6 @@ public class Calculator extends JFrame implements ActionListener {
                 }
             }
         }
-
         return result;
     }
 
@@ -143,7 +118,6 @@ public class Calculator extends JFrame implements ActionListener {
             outputFieldValidator(cmd, outputField);
         } else if (!outputField.getText().isEmpty()) {
             switch (cmd) {
-                case "±" -> toggleNegativeSign(outputField);
                 case "+", "-", "*", "/" -> {
                     expressionField.setText(expressionField.getText() + outputField.getText() + " " + cmd + " ");
                     outputField.setText("");
